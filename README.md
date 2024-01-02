@@ -69,6 +69,33 @@ const response = await openai.chat.completions.create({
     });
 
 console.log(response.choices[0].message.content);
+```
 
+## Setup
+This setup lets you run the chatbot locally.
 
+1. Clone this repository.
+2. Install dependencies.
+```bash
+npm install
+```
+3. Create a `.env` file and add your API keys. Your `.env` file should look like this:
+```
+GROUNDX_API_KEY="<YOUR_GROUNDX_API_KEY>"
+OPENAI_API_KEY="<YOUR_OPENAI_API_KEY>"
+SLACK_BOT_TOKEN="<YOUR_SLACK_BOT_TOKEN>"
+SLACK_SIGNING_SECRET="<YOUR_SLACK_SIGNING_SECRET>"
+SLACK_APP_TOKEN="<YOUR_SLACK_APP_TOKEN>"
+```
+
+## Usage
+After setting up the chatbot, you can run it locally and test it in your Slack workspace.
+
+1. Run the app from your terminal:
+```bash
+node app.js
+```
+2. Go to your Slack workspace.
+3. Add the app to a channel.
+4. Write a message and wait for the chatbot to respond within a couple of seconds.
 
