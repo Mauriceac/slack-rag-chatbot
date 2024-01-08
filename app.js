@@ -15,7 +15,7 @@ const groundx = new Groundx({
     apiKey: process.env.GROUNDX_API_KEY,
 })
 const openai = new OpenAI({
-        apiKey: process.env.OPENAI_API_KEY,
+    apiKey: process.env.OPENAI_API_KEY,
 });
 
 app.message(async ({ message, say }) => {
@@ -26,9 +26,9 @@ app.message(async ({ message, say }) => {
     const queryString = message.text;
 
     const groundXResponse = await groundx.search.content({
-        id: 7120,
+        id: 7120, //change this number with the id of the bucket or project you want to search through
         query: queryString,
-        n: 5
+        n: 5 //number of results to return, default is 20; ChatGPT has a limit of "tokens" per request, so we're limiting the number of results to 5 just in case.
     });
 
     llmText = groundXResponse.data.search.text
@@ -39,7 +39,7 @@ app.message(async ({ message, say }) => {
         messages: [
                 {
                         "role": "system",
-                        "content": `You are a chatbot for an online course. Use the data below to generate a response. Indicate the sources you've been given, if any. If the provided content is inadequate, answer 'Can you please provide more context?'.
+                        "content": `You are a chatbot for an online course. Use the data below to generate a response. Indicate the sources you've been given, if any. If the provided content is inadequate, answer 'I can't find an adequate response. Can you please provide more context?'.
                 ===
                 ${llmText}
                 ===
