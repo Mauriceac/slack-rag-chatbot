@@ -9,7 +9,7 @@ Content is stored within GroundX, a knowledge management platform that uses AI t
 - [Node.js](https://nodejs.org/en/download/)
 - [Slack workspace](https://slack.com/get-started#/create)
 - [GroundX account](https://www.groundx.ai/)
-- [OpenAI API key](https://platform.openai.com/)
+- [LM Studio](https://lmstudio.ai/)
 
 
 ## Setup
@@ -23,7 +23,7 @@ npm install
 3. Create a `.env` file and add your API keys. Your `.env` file should look like this:
 ```
 GROUNDX_API_KEY="<YOUR_GROUNDX_API_KEY>"
-OPENAI_API_KEY="<YOUR_OPENAI_API_KEY>"
+
 SLACK_BOT_TOKEN="<YOUR_SLACK_BOT_TOKEN>"
 SLACK_SIGNING_SECRET="<YOUR_SLACK_SIGNING_SECRET>"
 SLACK_APP_TOKEN="<YOUR_SLACK_APP_TOKEN>"
@@ -32,13 +32,14 @@ SLACK_APP_TOKEN="<YOUR_SLACK_APP_TOKEN>"
 ## Usage
 After setting up the chatbot, you can run it locally and test it in your Slack workspace.
 
-1. Run the app from your terminal:
+1. Run an LLM server using LM Studio.
+2. Run the app from your terminal:
 ```bash
 node app.js
 ```
-2. Go to your Slack workspace.
-3. Add the app to a channel.
-4. Write a message and wait for the chatbot to respond within a couple of seconds.
+1. Go to your Slack workspace.
+2. Add the app to a channel.
+3. Write a message and wait for the chatbot to respond within a couple of seconds.
 
 ## About the tools
 Here's some extra information about the tools we used to create this chatbot.
@@ -75,36 +76,8 @@ const result = await groundX.search.content({
 const llmText = result.data.search.text;
 ```
 
-### OpenAI - ChatGPT
-For this example, we are using the OpenAI API to generate responses. You can use any other API that generates text. Go to the [OpenAI documentation](https://platform.openai.com/docs/overview) for more information.
+### LM Studio
 
-#### Install
-```bash
-npm install --save openai
-```	
-
-#### API chat completion endpoint
-Example:
-```js
-const openai = require('openai');
-const OpenAI = new openai({
-    apiKey: process.env.OPENAI_API_KEY,
-});
-
-const response = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo",
-        messages: [
-            {
-                "role": "system",
-                "content": `Use the data below to generate a response. Indicate the sources you've been given, if any. If the provided content is inadequate, answer 'I don't have sufficent information to answer the question'.
-            ===
-            ${llmText}
-            ===
-            `
-            },
-            { "role": "user", "content": queryString },
-        ],
-    });
-
-console.log(response.choices[0].message.content);
-```
+1. Install [LM Studio](https://lmstudio.ai/) on your computer.
+2. With LM Studio, download an LLM.
+3. Using LM Studio, start the LLM server.
