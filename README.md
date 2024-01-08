@@ -1,4 +1,4 @@
-# Slack chatbot with GroundX and ChatGPT
+# Slack chatbot with GroundX and LM Studio
 
 ## Introduction
 This is a retrieval-augmented generation (RAG) chatbot that can respond to messages in a Slack workspace channel. The chatbot sends the generated response within the message thread.
