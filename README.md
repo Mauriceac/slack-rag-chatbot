@@ -16,12 +16,13 @@ Content is stored within GroundX, a knowledge management platform that uses AI t
 ## Setup
 This setup lets you run the chatbot locally.
 
-1. Clone this repository.
-2. Install dependencies.
+1. Create a Slack App and install it in your workspace. Go to the [Slack documentation](https://api.slack.com) for more information or the [Slack Bolt tutorial](https://slack.dev/bolt-js/tutorial/getting-started) for a step-by-step tutorial that can help you out.
+2. Clone this repository.
+3. Install dependencies.
 ```bash
 npm install
 ```
-3. Create a `.env` file and add your API keys. Your `.env` file should look like this:
+1. Create a `.env` file and add your API keys. Your `.env` file should look like this:
 ```
 GROUNDX_API_KEY="<YOUR_GROUNDX_API_KEY>"
 OPENAI_API_KEY="<YOUR_OPENAI_API_KEY>"
