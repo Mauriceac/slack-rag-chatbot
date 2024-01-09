@@ -18,42 +18,48 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
 
-app.message(async ({ message, say }) => {
+app.event('app_mention', async ({ event, context }) => {
     
     try {
         // Send user's message to GroundX API
-    console.log('Received message:', message.text);
-    const queryString = message.text;
-
-    const groundXResponse = await groundx.search.content({
-        id: 7120, //change this number with the id of the bucket or project you want to search through
-        query: queryString,
-        n: 5 //number of results to return, default is 20; ChatGPT has a limit of "tokens" per request, so we're limiting the number of results to 5 just in case.
-    });
-
-    llmText = groundXResponse.data.search.text
-
-    // Send GroundX response to ChatGPT API
-    const openAIResponse = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo",
-        messages: [
-                {
+        console.log('Received message:', event.text);
+        const message = event.text.replace(/<@U[A-Z0-9]+>/, '');
+    
+        const groundXResponse = await groundx.search.content({
+            id: 7120, //change this number with the id of the bucket or project you want to search through
+            query: message,
+            n: 5 //number of results to return, default is 20; ChatGPT has a limit of "tokens" per request, so we're limiting the number of results to 5 just in case.
+        });
+    
+        llmText = groundXResponse.data.search.text
+    
+        // Send GroundX response to ChatGPT API
+        const openAIResponse = await openai.chat.completions.create({
+            model: "gpt-3.5-turbo",
+            messages: [
+                    {
                         "role": "system",
-                        "content": `You are a chatbot for an online course. Use the data below to generate a response. Indicate the sources you've been given, if any. If the provided content is inadequate, answer 'I can't find an adequate response. Can you please provide more context?'.
-                ===
-                ${llmText}
-                ===
-                `
-                },
-                { "role": "user", "content": queryString },
-        ],
-    })
-
-    // Send ChatGPT response back to the user in the Slack thread
-    await say({
-        thread_ts: message.ts,
-        text: openAIResponse.choices[0].message.content
-    });
+                        "content": `You're a helpful chatbot for an online course. Use the data below to generate a response. Indicate the sources you've been given, if any. If the provided content is inadequate to respond, answer 'I don't have enough information to answer your question.'.
+                            ===
+                            ${llmText}
+                            ===
+                            `
+                    },
+                    { 
+                        "role": "user", 
+                        "content": message 
+                    },
+            ],
+        })
+    
+        // Send ChatGPT response back to the user in the Slack thread
+            await app.client.chat.postMessage({
+                token: context.botToken,
+                channel: event.channel,
+                thread_ts: event.ts,
+                text: `Hi, <@${event.user}>! ` + openAIResponse.choices[0].message.content
+            });  
+    
     } catch (error) {
         console.error(error);
     }
