@@ -8,6 +8,7 @@ Content is stored within GroundX, a knowledge management platform that uses AI t
 ## Prerequisites
 - [Node.js](https://nodejs.org/en/download/)
 - [Slack workspace](https://slack.com/get-started#/create)
+- [Slack Bolt SDK](https://api.slack.com/tools/bolt)
 - [GroundX SDK and API key](https://www.groundx.ai/)
 - [OpenAI SDK and API key](https://platform.openai.com/)
 
