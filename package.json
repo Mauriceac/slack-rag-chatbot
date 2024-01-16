@@ -5,6 +5,7 @@
   "description": "This is a RAG chatbot that can be used in Slack. It retrieves data from GroundX and uses ChatGPT to generate responses.",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
