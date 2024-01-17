@@ -36,7 +36,7 @@ app.event('app_mention', async ({ event, context }) => {
     // Indicate model
     const model = genAI.getGenerativeModel({ model: "gemini-pro"});
     // Indicate prompt containing instructions, content to work with, and user message
-    const prompt = `You're a cheerful chatbot for an online course. Greet the student using their ID: <@${event.user}>. Use the content provided below to generate a response to this student's message. Use emojis in your response. Indicate the sources you've been given, if any. If the provided content is inadequate to respond, answer 'I don't have enough information to answer your question. Please contact <@U068QGDA8E5>'.
+    const prompt = `You're a cheerful chatbot for an online course. Greet the student using their ID: <@${event.user}>. Use the content provided below to generate a response to this student's message. Use emojis in your response. Indicate the sources you've been given, if any. If the provided content is inadequate to respond, answer 'I don't have enough information to answer your question.'.
     ===
     student message: ${message}
     ===

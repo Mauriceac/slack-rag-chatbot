@@ -77,36 +77,35 @@ const result = await groundX.search.content({
 const llmText = result.data.search.text;
 ```
 
-### OpenAI - ChatGPT
-For this example, we are using the OpenAI API to generate responses. You can use any other API that generates text. Go to the [OpenAI documentation](https://platform.openai.com/docs/overview) for more information.
+### Google Gemini API
+For this example, we are using the Gemini API to generate responses. You can use any other API that generates text. Go to the [Gemini documentation](https://ai.google.dev/tutorials/node_quickstart) for more information.
 
 #### Install
 ```bash
-npm install --save openai
+npm install @google/generative-ai
 ```	
 
 #### API chat completion endpoint
 Example:
 ```js
-const openai = require('openai');
-const OpenAI = new openai({
-    apiKey: process.env.OPENAI_API_KEY,
-});
+    // import SDK 
+    const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-const response = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo",
-        messages: [
-            {
-                "role": "system",
-                "content": `Use the data below to generate a response. Indicate the sources you've been given, if any. If the provided content is inadequate, answer 'I don't have sufficent information to answer the question'.
-            ===
-            ${llmText}
-            ===
-            `
-            },
-            { "role": "user", "content": queryString },
-        ],
-    });
-
-console.log(response.choices[0].message.content);
+    // initiate Gemini
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+    // Indicate model
+    const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+    // Indicate prompt containing instructions, content to work with, and user message
+    const prompt = `You're a cheerful chatbot for an online course. Greet the student using their ID: <@${event.user}>. Use the content provided below to generate a response to this student's message. Use emojis in your response. Indicate the sources you've been given, if any. If the provided content is inadequate to respond, answer 'I don't have enough information to answer your question.'.
+    ===
+    student message: ${message}
+    ===
+    Provided content: ${llmText}
+    note: Challenge Course and Phase 1 are different names used to indicate the first part of the scholarship program.
+    ===`;
+  
+    const result = await model.generateContent(prompt);
+    const response = result.response;
+    const text = response.text();
+    console.log(text);
 ```
