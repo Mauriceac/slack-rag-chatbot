@@ -1,9 +1,9 @@
-# Slack chatbot with GroundX and ChatGPT
+# Slack chatbot with GroundX and Gemini
 
 ## Introduction
 This is a retrieval-augmented generation (RAG) chatbot that can respond to messages in a Slack workspace channel. The chatbot sends the generated response within the message thread.
 
-Content is stored within GroundX, a knowledge management platform that uses AI to help you find the right information at the right time. The chatbot uses the GroundX API to search for content and the OpenAI (ChatGPT) API to generate the chatbot's responses.
+Content is stored within GroundX, a knowledge management platform that uses AI to help you find the right information at the right time. The chatbot uses the GroundX API to search for content and the Gemini (Google) API to generate the chatbot's responses.
 
 ## Prerequisites
 - [Node.js](https://nodejs.org/en/download/)
