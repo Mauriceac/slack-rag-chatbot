@@ -10,7 +10,7 @@ Content is stored within GroundX, a knowledge management platform that uses AI t
 - [Slack workspace](https://slack.com/get-started#/create)
 - [Slack Bolt SDK](https://api.slack.com/tools/bolt)
 - [GroundX SDK and API key](https://www.groundx.ai/)
-- [OpenAI SDK and API key](https://platform.openai.com/)
+- [OpenAI SDK and API key](https://ai.google.dev/tutorials/node_quickstart)
 
 
 ## Setup
@@ -25,7 +25,7 @@ npm install
 1. Create a `.env` file and add your API keys. Your `.env` file should look like this:
 ```
 GROUNDX_API_KEY="<YOUR_GROUNDX_API_KEY>"
-OPENAI_API_KEY="<YOUR_OPENAI_API_KEY>"
+GEMINI_API_KEY="<YOUR_OPENAI_API_KEY>"
 SLACK_BOT_TOKEN="<YOUR_SLACK_BOT_TOKEN>"
 SLACK_SIGNING_SECRET="<YOUR_SLACK_SIGNING_SECRET>"
 SLACK_APP_TOKEN="<YOUR_SLACK_APP_TOKEN>"
